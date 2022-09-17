@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQUery Giriş</title>
+</head>
+<body>
+    <h1 id="baslik">JQuery Öğreniyorum</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat cupiditate impedit alias eum id non soluta ducimus, consectetur nesciunt error?</p>
+    <p>Explicabo molestiae, vitae, reprehenderit repellat cupiditate accusamus similique modi quidem sequi eos ullam error? Voluptas repellat cumque perspiciatis natus cupiditate!</p>
+    <p id="orta">Nemo, laborum excepturi deleniti, voluptatem non at sequi quo perspiciatis sit neque earum distinctio! Quis minus consequatur illo adipisci voluptatem.</p>
+    <p>Voluptas voluptates ea iure quae reiciendis. Voluptate aperiam totam, iure quos, dolorem expedita quibusdam quod id eaque consequatur assumenda possimus!</p>
+    <p>Quis dolore, minus dicta possimus officiis adipisci, maxime, corrupti quaerat praesentium perferendis cum exercitationem sequi numquam illo odit asperiores quisquam?</p>
+    <script src="jquery-3.6.0.js"></script>
+    <script>
+        $("#baslik").css({
+            "border": "1px solid black",
+            "background-color": "darkblue",
+        }).text("I Love JQuery").css("color","white") //Tek değişiklik için one line virgülle yazılabilir.
+
+//Başlığı gizle
+
+$("#baslik").hide();
+
+// başlığı ağır ağır göster
+
+// $("#baslik").show(2000);
+$("#baslik").show();
+
+
+$("#baslik").css("text-align","center");
+
+//&quot<em>seni çöpe atacağım poşete yazık</em>&quot -Serdar Ortaç
+
+$("p").first().html("&quot<em>seni çöpe atacağım poşete yazık</em>&quot -Serdar Ortaç")
+
+// İlkayın gezmek istediği yerleri liste halinde oluşturalım ve 3. paragraftan snraya ekle
+
+let li =$("<li/>").text("Prag");
+$("<ul/>")
+.attr("id","listem")
+.append("<li>Miami</li>")
+.append("<li>Viyana</li>")
+.append(li)
+// .insertAfter("p:nth-child(3)") p tipindeyse 3 h1 i de sayar
+// .insertAfter("p:nth-of-type(3)") direkt 3. paragrafı sayar
+.insertAfter("#orta")
+
+//ul'dan önce h3 başlık gezi listem
+
+// $("ul").before("<h3>Gezi Listem</h3>");
+$("#listem").before("<h3>Gezi Listem</h3>");
+
+//surpriz.txt dosyasındaki metni son paragrafa koyalım
+
+$("p").last().load("surpriz.txt").css("border","3px double black");  //ajax metodu
+
+//tüm p ve li'lerin içindeki metin uzunluğunu parantez içinde sonlarına ekle
+$("p,li").each(function(){
+// $(this).append("("+(this).text().length +")")
+let uzunluk =$(this).text().length;
+$(this).append("("+uzunluk+ ")")
+});
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

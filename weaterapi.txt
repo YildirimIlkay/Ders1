@@ -1,0 +1,5 @@
+98ff93894bdc37119a806c43f68a30a3
+
+https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}&units=metric&lang=tr
+
+http://openweathermap.org/img/wn/{icon code}@2x.png -->icon

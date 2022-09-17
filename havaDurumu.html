@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hava Durumu</title>
+    <style>
+        .body{
+            padding: .5rem;
+        }
+.durum{
+    max-width: 300px;
+    margin-top: 2rem;
+    box-shadow: rgba(0,0,0,0.24) 0px 3px 8px;
+    padding: 1rem;
+    background-color: #00a9ff;
+    color: white;
+    letter-spacing: 1px;
+}
+.durum::after{
+    content: "";
+    clear: both;
+    display: block;
+}
+.durum-resim{
+    float: right;
+}
+.durum-yer{
+    font-size: 1.5rem;
+    opacity: 0.9;
+}
+.durum-sicaklik{
+    font-size: 3rem;
+}
+.durum-aciklama{
+    font-style: italic;
+    opacity: 0.5;
+}
+    </style>
+</head>
+<body>
+    <h1>Hava Durumu</h1>
+    <form action="#" id="frmHava">
+        <label for="yer">Yer:</label>
+        <input type="text" id="yer" required>
+        <button>Öğren</button>
+    </form>
+
+    <div id="sonuc"></div>
+
+<script src="jquery-3.6.0.js"></script>
+<script>
+
+
+    $("#frmHava").submit(function(event) {
+        event.preventDefault();
+        let yer = $("#yer").val();
+        // $("#sonuc").text(yer)
+        let apiUrl= getApiUrl(yer);
+        $.ajax({
+            type:"GET",
+            url:apiUrl,
+            success: function(data) {
+                let sicaklik = data.main.temp;
+                let aciklama = data.weather[0].description;
+                let icon= data.weather[0].icon;
+                let ad = data.name;
+                let iconUrl= "http://openweathermap.org/img/wn/"+icon+"@2x.png";
+                let html= `
+                <div class="durum">
+<img src="${iconUrl}" alt="${aciklama}" class="durum-resim" />
+<div class="durum-yer">${ad}</div>
+<div class="durum-sicaklik">${sicaklik.toFixed(1)}°</div>
+<div class="durum-aciklama">${aciklama}</div>
+
+                    </div>`
+                    ;
+                    $("#sonuc").html(html);
+            }
+        });
+
+    });
+
+    function getApiUrl(yer) {
+        return "https://api.openweathermap.org/data/2.5/weather?q="+ yer + "&appid=98ff93894bdc37119a806c43f68a30a3&units=metric&lang=tr";
+    }
+    //demo amaçlı olarak ankara girilsin
+$("#yer").val("ankara");
+$("#frmHava").submit();
+</script>
+</body>
+</html>
